@@ -1,0 +1,46 @@
+default_method_hyperparameters:
+  batch_size: 256
+  top_p: 0.999
+  top_k: 10
+  threshold: 2500
+  num_workers: 0
+  response_length: 512
+  prompt_length_threshold: 30
+  use_chat_template: True
+  target_model_type: open_source
+  surrogate_model: null
+  judge_model:
+    # model_name_or_path: cais/HarmBench-Llama-2-13b-cls
+    model_name_or_path: ../.cache/huggingface/hub/models--cais--HarmBench-Llama-2-13b-cls/snapshots/bda705349d1144fa618770bea64d99ce54e3835b
+    num_gpus: 1
+    dtype: bfloat16
+  max_model_len: 2048 # max length of the judge model is 2048
+
+<model_name1>:
+  target_model: <model_name1>['model']
+  target_model_type: <model_name1>['model_type']
+  num_gpus: <model_name1>['num_gpus']
+
+<model_name1>__surrogate__<model_name2>:
+  target_model: <model_name1>['model']
+  target_model_type: <model_name1>['model_type']
+  surrogate_model: <model_name2>['model']
+  num_gpus: <model_name2>['num_gpus']
+
+# vicuna_7b_v1_5:
+#   batch_size: 32
+#   response_length: 32
+#   target_model:
+#     model_name_or_path: <model_name1>['model']['model_name_or_path']
+#     use_fast_tokenizer: False
+#     use_flash_attention_2: True
+#     chat_template: <model_name1>['model']['chat_template']
+
+# vicuna_13b_v1_5:
+#   batch_size: 32
+#   response_length: 32
+#   target_model:
+#     model_name_or_path: <model_name1>['model']['model_name_or_path']
+#     use_fast_tokenizer: False
+#     use_flash_attention_2: True
+#     chat_template: <model_name1>['model']['chat_template']
